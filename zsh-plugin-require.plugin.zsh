@@ -20,12 +20,19 @@ function require {
 	local manager="$3"
 
 	if ! [ -z $manager ] && ! [ -x "$(command -v $manager)" ]; then
-		echo "Package manger $manager not found, please install $cmd using your favorite package manager."
+		echo "Required package manger command '$manager' not found, please install missing command '$cmd'."
 		return
 	fi
 
 	if ! [ -x "$(command -v $cmd)" ]; then
-		echo "Could not find $cmd, installing using: $install..."
+
+		# Add export REQUIRE_AUTO_INSTALL="off" to .zshrc to stop auto installation.
+		if [[ "off" = "$REQUIRE_AUTO_INSTALL" ]]; then
+			echo "Could not find '$cmd' command and it is required, some functionality may not work until you install it."
+			return
+		fi
+
+		echo "Could not find '$cmd' command, installing using: $install..."
 		eval ${install}
 	fi
 }

@@ -30,6 +30,10 @@ antigen bundle aubreypwd/zsh-plugin-require
 
 ## Changelog
 
+### 1.0.2
+
+- Add `export REQUIRE_AUTO_INSTALL="off"` to `~/.zshrc` to turn off auto installation of requires
+
 ### 1.0.1
 
 - Added a 3rd option to specify a package manager's command be required, e.g.
