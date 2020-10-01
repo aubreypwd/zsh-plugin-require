@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 ###
- # My Plugin
+ # Require
  #
  # @since 1.0.0
  ##
