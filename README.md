@@ -30,6 +30,22 @@ antigen bundle aubreypwd/zsh-plugin-require
 
 ## Changelog
 
+### 1.0.1
+
+- Added a 3rd option to specify a package manager's command be required, e.g.
+
+```bash
+require "foo" "brew reinstall bar" "brew"
+```
+
+This will run `brew reinstall bar` if the `foo` command is not found, only if the `brew` command is found (e.g. the `brew` homebrew package manager command), vs:
+
+```bash
+require "foo" "/bin/bash -c $(curl -fsSL https://example.com/install.sh)"
+```
+
+Which will run `/bin/bash -c $(curl -fsSL https://example.com/install.sh)` reguardless if any command without performing any checks (as it did before, and you can still do).
+
 ### 1.0.0
 
 - First version
