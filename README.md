@@ -8,6 +8,12 @@ require "git" "brew install git"
 
 ...will detect `git`, and if you don't have it installed will automatically run `brew install git` for you to install it.
 
+```bash
+require "git" "brew install git" "brew"
+```
+
+Will only run `brew install git` if the command `git` is missing and `brew` is available to install it.
+
 ## Install
 
 Using [antigen](https://github.com/zsh-users/antigen):
