@@ -15,12 +15,13 @@
  # @since 1.0.0
  ##
 function require {
+
 	local cmd="$1"
 	local install="$2"
 	local manager="$3"
 
 	if ! [ -z $manager ] && ! [ -x "$(command -v $manager)" ]; then
-		echo "Required package manager command '$manager' not found, please install missing command '$cmd'."
+		echo "Required package manager command '$manager' not found, please install missing command '$cmd' so we can automatically handle dependancies."
 		return
 	fi
 
