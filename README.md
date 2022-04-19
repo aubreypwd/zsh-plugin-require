@@ -19,8 +19,10 @@ Will only run `brew install git` if the command `git` is missing and `brew` is a
 Using [antigen](https://github.com/zsh-users/antigen):
 
 ```bash
-antigen bundle aubreypwd/zsh-plugin-require@1.0.0
+antigen bundle aubreypwd/zsh-plugin-require
 ```
+
+When you have this installed, any other plugins that use it will automatically be able to manage dependancies automatically. 
 
 ## Development
 
@@ -35,6 +37,8 @@ antigen bundle ssh://git@github.com/aubreypwd/zsh-plugin-require
 ---
 
 ## Changelog
+
+Changelogs beyond these versions were moved to Github releases.
 
 ### 1.0.2
 
