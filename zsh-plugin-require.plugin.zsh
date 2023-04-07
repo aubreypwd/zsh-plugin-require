@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/sh
 
 ###
  # Require a command (and install if missing).
@@ -14,26 +14,38 @@
  # @since Sun June 9th 2019
  # @since 1.0.0
  ##
-function require {
+require () {
 
-	local cmd="$1"
-	local install="$2"
-	local manager="$3"
+	CMD="$1"
+	INSTALL="$2"
+	MANAGER="$3"
 
-	if ! [ -z $manager ] && ! [ -x "$(command -v $manager)" ]; then
-		echo "Required package manager command '$manager' not found, please install missing command '$cmd' so we can automatically handle dependancies."
-		return
+	if [ -n "$MANAGER" ] && ! [ -x "$(command -v "$MANAGER")" ]; then
+
+		echo "Required package manager command '$MANAGER' not found, please install missing command '$CMD' so we can automatically handle dependancies."
+
+		return 1
 	fi
 
-	if ! [ -x "$(command -v $cmd)" ]; then
+	if alias "$CMD" >/dev/null 2>&1; then
+
+		# The required command is an alias, we'll just have to trust them.
+		return 0
+	fi
+
+	if ! [ -x "$(command -v "$CMD")" ]; then
 
 		# Add export REQUIRE_AUTO_INSTALL="off" to .zshrc to stop auto installation.
-		if [[ "off" = "$REQUIRE_AUTO_INSTALL" ]]; then
-			echo "Could not find '$cmd' command and it is required, some functionality may not work until you install it."
-			return
+		if [ "off" = "$REQUIRE_AUTO_INSTALL" ]; then
+
+			echo "Could not find '$CMD' command and it is required, some functionality may not work until you install it."
+
+			return 1
 		fi
 
-		echo "Could not find '$cmd' command, installing using: $install..."
-		eval ${install}
+		echo "Could not find '$CMD' command, installing using: $INSTALL..."
+		eval "${INSTALL}"
 	fi
+
+	return 0
 }
